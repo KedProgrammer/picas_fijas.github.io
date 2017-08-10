@@ -1,13 +1,18 @@
 
 var template = Handlebars.compile($('#game-template').html());
-var intents = Handlebars.compile($('#game-intents').html());
 var game_number; 
 var record = 999999;
 var intentos = 0;
 var game;
 
+//Inicia el juego cuando la pagina termina de cargar
+$("document").ready(function(){
 
+ game_start();
 
+});
+
+//Funcion que valida si un numero esta repetido
 var repeat_number = function(number){
 	var array = number.toString().split("");
 	for (var i = 0; i < 4; i++){
@@ -22,7 +27,7 @@ var repeat_number = function(number){
 }
 
 
-
+//function que valida que el numero tenga 4 digitos
 var comprobate_digits = function(number){
 	if (  number/1000 >= 1 && number/1000 <= 10  ) 
 	{
@@ -35,7 +40,7 @@ var comprobate_digits = function(number){
 }
 
 
-
+//function que genera el numero aleatorio validado
 var generate_number = function(){
 	var aleatory_number =  Math.floor(Math.random() * 10000) ;
 	if (comprobate_digits(aleatory_number) && repeat_number(aleatory_number)){
@@ -51,8 +56,11 @@ var generate_number = function(){
 
 
 
-
+//function que setea las variables en 0 y genera un nuevo numero
 var game_start = function(){
+	$("tbody tr").remove();
+	game_number = 0;
+	intentos = 0
 	$("#intents").text("0");
 	game = {
 		number: 0,
@@ -65,16 +73,11 @@ var game_start = function(){
 }  
 
 
-
-
+//function que saca el modal y setea el record
  var game_end = function(){
- 	$(".modal").css("display","block");
- 	$("#new_game").on("click", function(){
-		$("tbody tr").remove();
-		game_start();
-	});
+ 	$(".modal").css("display","flex");
+ 	
 	(intentos<record) ?  record = intentos : record = record;
-	intentos = 0
 	$("#record").text(record);
 
  }
@@ -83,19 +86,7 @@ var game_start = function(){
 
 
 
-
-
-$("document").ready(function(){
-
- game_start();
-
-});
-
-
-
-
-
-
+//function que saca el numero de picas y fijas en un array
 var picas_fijas = function(user_number , game_number){
 	var picas_fijas = [0,0];
 
@@ -118,6 +109,7 @@ var picas_fijas = function(user_number , game_number){
 }
 
 
+//remueva clases
 
 var remove_class = function(){
 
@@ -130,7 +122,7 @@ var remove_class = function(){
 
 
 
-
+//añade clases
 var add_class = function(){
 
 		$("h3 span").addClass("error");
@@ -149,7 +141,7 @@ var add_class = function(){
 $("input").on("keypress", function(e){
 
 if (e.which === 13){
-
+//valida el numero ingresado por el usuario 
 	if (comprobate_digits($(this).val()) && repeat_number($(this).val())){
 		remove_class();
 		game = {
@@ -159,6 +151,7 @@ if (e.which === 13){
 
 		};
 		$("#intents").text(++intentos);
+//valida el termino del juego
 		if (game.picas_fijas[0] == 4){
 				
 				game_end();
@@ -171,8 +164,15 @@ if (e.which === 13){
 		add_class();
 	}
 }
-
 });
+
+
+
+
+//inicial el juego al darle el boton del modal
+$("button").on("click", function(){
+		game_start();
+	});
 
 
 
