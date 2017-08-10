@@ -113,7 +113,7 @@ var picas_fijas = function(user_number , game_number){
 
 var remove_class = function(){
 
-		$("h3 span").removeClass("error");
+		$("h3:nth-child(2) span").removeClass("error");
 		$("input").removeClass("error");
 		$("input").css("background-color","white")
 }
@@ -125,7 +125,7 @@ var remove_class = function(){
 //añade clases
 var add_class = function(){
 
-		$("h3 span").addClass("error");
+		$("h3:nth-child(2) span").addClass("error");
 		$("input").addClass("error");
 		$("input").css("background-color","#ff9999")
 
