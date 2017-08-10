@@ -1,6 +1,11 @@
 
 var template = Handlebars.compile($('#game-template').html());
+var intents = Handlebars.compile($('#game-intents').html());
 var game_number; 
+var record = 999999;
+var intentos = 0;
+var game;
+
 
 
 var repeat_number = function(number){
@@ -48,6 +53,12 @@ var generate_number = function(){
 
 
 var game_start = function(){
+	$("#intents").text("0");
+	game = {
+		number: 0,
+		picas_fijas: [],  
+		intentos: 0
+		};
 	$(".modal").css("display","none");
 	game_number = generate_number();
 	console.log(game_number);
@@ -62,6 +73,10 @@ var game_start = function(){
 		$("tbody tr").remove();
 		game_start();
 	});
+	(intentos<record) ?  record = intentos : record = record;
+	intentos = 0
+	$("#record").text(record);
+
  }
 
 
@@ -131,20 +146,21 @@ var add_class = function(){
 
 
 
-
 $("input").on("keypress", function(e){
 
 if (e.which === 13){
 
 	if (comprobate_digits($(this).val()) && repeat_number($(this).val())){
 		remove_class();
-		var game = {
+		game = {
 			number: $(this).val(),
-			picas_fijas: picas_fijas($(this).val(),game_number)  
+			picas_fijas: picas_fijas($(this).val(),game_number),  
+			
 
 		};
-
+		$("#intents").text(++intentos);
 		if (game.picas_fijas[0] == 4){
+				
 				game_end();
 		}
 		$('table tbody').append(template(game));

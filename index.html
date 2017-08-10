@@ -25,14 +25,15 @@
 
         <div class="screen"> 
             <div class="center">
-            <h1>Picas y fijas</h1>
+            <h1>Picas y Fijas</h1>
             <h3>Ingresa <span>cuatro digitos diferentes</span> y oprime enter</h3>
+            <h3> intentos: <span id="intents">0</span > record: <span id="record">0</span> </h3>
             
             </div>
-            <div id="content center">
+            <div class="content ">
                 <input type="number" name="" id="numero">
                 <table class="table bordered-table table-striped">
-                    <thead>
+                    <thead class="center">
                         <tr>
                             <th>
                                 Number 
@@ -69,6 +70,10 @@
                 <td>{{picas_fijas.[1]}}</td>
                 <td>{{picas_fijas.[0]}}</td>
              </tr>
+        </script>
+        <script id="game-intents" type="text/x-handlebars-template">
+            <span>{{intentos}}</span>  
+           
         </script> 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>

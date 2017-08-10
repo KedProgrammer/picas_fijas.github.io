@@ -157,12 +157,26 @@ text-align: center;
 
 }
 
-#content{
+.content{
 
 
-    width: 40%;
+    width: 15%;
 }
 
+
+td, th {
+  border: 2px solid #ddd;
+
+}
+
+table{
+
+    margin-top: 40px;
+}
+
+#numero{
+    width: -webkit-fill-available;
+}
 
 
 
